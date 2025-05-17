@@ -63,7 +63,7 @@ const Sidebar = () => {
             to={item.to}
             key={index}
             className={({ isActive }) =>
-              `flex items-center mb-10 ${
+              `flex items-center no-underline mb-10 ${
                 isOpen ? "justify-start px-4" : "justify-center"
               } py-2 cursor-pointer hover:bg-orange-100 transition-all ${
                 isActive
@@ -82,3 +82,5 @@ const Sidebar = () => {
 };
 
 export default Sidebar;
+
+

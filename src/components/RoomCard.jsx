@@ -6,7 +6,7 @@ const RoomCard = ({ name, percentage, omzet }) => {
   const offset = circumference - (circumference * percentage) / 100;
 
   return (
-    <div className="bg-white rounded-xl shadow-sm px-6 py-4 w-full max-w-xs">
+    <div className="bg-white rounded-xl shadow-sm px-6 py-4 w-full ">
       <div className="flex justify-between items-center">
         {/* Kiri: Semua info */}
         <div className="flex flex-col justify-between h-full">

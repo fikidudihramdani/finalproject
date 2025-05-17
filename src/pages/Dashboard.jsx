@@ -38,7 +38,7 @@ const Dashboard = () => {
               </label>
               <input
                 type="date"
-                className="p-2 border rounded w-full"
+                className="p-2 rounded border border-gray-200 w-full"
                 placeholder="Start Date"
               />
             </div>
@@ -49,7 +49,7 @@ const Dashboard = () => {
               </label>
               <input
               type="date"
-              className="p-2 border rounded w-full"
+              className="p-2 rounded border-gray-200 w-full"
               placeholder="End Date"
             />
             </div>
@@ -69,7 +69,7 @@ const Dashboard = () => {
           </div>
 
           {/* Room Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl-grid-cols-5 gap-4">
             {roomData.map((room, index) => (
               <RoomCard key={index} {...room} />
             ))}
