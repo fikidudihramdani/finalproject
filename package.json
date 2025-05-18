@@ -7,7 +7,7 @@
     "react",
     "tailwindcss"
   ],
-    "type": "module",
+  "type": "module",
   "scripts": {
     "build": "vite build",
     "dev": "vite",
@@ -15,7 +15,6 @@
     "preview": "vite preview",
     "start": "vite"
   },
-  
   "dependencies": {
     "@tailwindcss/forms": "^0.5.10",
     "@tailwindcss/typography": "^0.5.16",
@@ -44,6 +43,7 @@
     "prettier-plugin-tailwindcss": "^0.6.11",
     "vite": "^6.1.0",
     "vite-plugin-singlefile": "^2.1.0",
+    "vite-plugin-svgr": "^4.3.0",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }

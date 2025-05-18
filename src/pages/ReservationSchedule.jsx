@@ -6,10 +6,10 @@ import AddReservationForm from "@components/ReservationForm";
 
 const ReservationSchedule = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
   const [rooms, setRooms] = useState([
     {
       name: "Aster Room",
+      price: 1000,
       reservations: [
         { title: "PT Maju Jaya", time: "13.00 - 15.00 WIB", status: "Done" },
         { title: "Organisasi Muslim Pusat", time: "13.00 - 15.00 WIB", status: "Up coming" },
@@ -17,12 +17,14 @@ const ReservationSchedule = () => {
     },
     {
       name: "Blubell Room",
+      price: 1000,
       reservations: [
         { title: "PT XYZ Corp", time: "10.00 - 11.00 WIB", status: "In Progress" },
       ],
     },
     {
       name: "Camellia Room",
+      price: 1000,
       reservations: [
         { title: "Alisa Company", time: "14.00 - 15.00 WIB", status: "Up coming" },
       ],
@@ -30,7 +32,8 @@ const ReservationSchedule = () => {
   ]);
 
   const timeSlots = [
-    "08.00", "09.00", "10.00", "11.00", "12.00", "13.00", "14.00", "15.00", "16.00",
+    "08.00", "09.00", "10.00", "11.00", "12.00",
+    "13.00", "14.00", "15.00", "16.00",
   ];
 
   const [formData, setFormData] = useState({
@@ -42,7 +45,9 @@ const ReservationSchedule = () => {
     startTime: "",
     endTime: "",
     participants: "",
+    snack: "",
     addSnack: false,
+    note: "",
   });
 
   const handleChange = (e) => {
@@ -53,14 +58,9 @@ const ReservationSchedule = () => {
     }));
   };
 
-  const handleAddReservation = (e) => {
-    e.preventDefault();
-    const {
-      room,
-      company,
-      startTime,
-      endTime,
-    } = formData;
+  const handleAddReservation = (data) => {
+    // Gunakan data dari form submit
+    const { room, company, startTime, endTime } = data;
 
     if (!room || !company || !startTime || !endTime) {
       alert("Please fill all required fields.");
@@ -95,13 +95,14 @@ const ReservationSchedule = () => {
       startTime: "",
       endTime: "",
       participants: "",
+      snack: "",
       addSnack: false,
+      note: "",
     });
   };
 
   return (
     <div className="flex h-screen bg-gray-100">
-      {/* Sidebar */}
       <div className="fixed inset-y-0 left-0 bg-white shadow z-30">
         <Sidebar />
       </div>
@@ -112,7 +113,6 @@ const ReservationSchedule = () => {
         </div>
 
         <div className="p-4">
-          {/* Filter */}
           <div className="mb-4 bg-white p-4 shadow rounded">
             <div className="flex flex-wrap md:flex-nowrap items-center gap-3">
               <h2 className="text-gray-700 font-medium border-r pr-4 md:w-auto w-full md:text-base text-sm">
@@ -135,36 +135,41 @@ const ReservationSchedule = () => {
             </div>
           </div>
 
-          {/* Grid */}
-          <div className="rounded bg-white shadow p-6">
-            <div className="flex min-w-[1000px]">
-              {/* Time column */}
-              <div className="w-[100px]">
-                <div className="h-[48px]"></div>
-                {timeSlots.map((time, idx) => (
-                  <div key={idx} className="h-[60px] text-sm text-gray-600 flex items-start justify-center pt-2">
-                    {time}
-                  </div>
+          <div className="rounded bg-white shadow p-6 scrollbar-thin">
+            <div className="min-w-full overflow-scroll h-90">
+              <div className="flex min-w-[1000px]">
+                <div className="w-[100px]">
+                  <div className="h-[48px]"></div>
+                  {timeSlots.map((time, idx) => (
+                    <div key={idx} className="h-[60px] text-sm text-gray-600 flex items-start justify-center pt-2">
+                      {time}
+                    </div>
+                  ))}
+                </div>
+
+                {rooms.map((room, index) => (
+                  <RoomColumn key={index} room={room} />
                 ))}
               </div>
-
-              {/* Room columns */}
-              {rooms.map((room, index) => (
-                <RoomColumn key={index} room={room} />
-              ))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Reservation Form Sidebar */}
+      {/* Overlay Background */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black opacity-25 z-30"
+          onClick={() => setIsSidebarOpen(false)}
+        ></div>
+      )}
+
       <AddReservationForm
         isOpen={isSidebarOpen}
         onClose={() => setIsSidebarOpen(false)}
         onSubmit={handleAddReservation}
-        formData={formData}
-        onChange={handleChange}
         rooms={rooms}
+        snacks={[{ name: 'Snack A', price: 10000 }, { name: 'Snack B', price: 10000 }]}
       />
     </div>
   );

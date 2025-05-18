@@ -1,5 +1,5 @@
 # 🚀 E Learning Final Project
 
 
-[![Screenshot](screenshot.png)]
+![Screenshot](screenshot.png)
 
