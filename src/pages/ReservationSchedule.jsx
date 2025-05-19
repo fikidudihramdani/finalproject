@@ -31,10 +31,7 @@ const ReservationSchedule = () => {
     },
   ]);
 
-  const timeSlots = [
-    "08.00", "09.00", "10.00", "11.00", "12.00",
-    "13.00", "14.00", "15.00", "16.00",
-  ];
+  const timeSlots = Array.from({ length: 24 }, (_, i) => `${String(i).padStart(2, "0")}.00`);
 
   const [formData, setFormData] = useState({
     room: "",
@@ -136,7 +133,7 @@ const ReservationSchedule = () => {
           </div>
 
           <div className="rounded bg-white shadow p-6 scrollbar-thin">
-            <div className="min-w-full overflow-scroll h-90">
+            <div className="min-w-full overflow-scroll h-90 xl:h-180">
               <div className="flex min-w-[1000px]">
                 <div className="w-[100px]">
                   <div className="h-[48px]"></div>

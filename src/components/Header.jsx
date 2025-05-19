@@ -9,7 +9,7 @@ const Header = ({ onLogout }) => {
   const pathTitleMap = {
     "/dashboard": "Dashboard",
     "/resevarsi": "Reservation Schedule",
-    "/dashboard/reports": "Reports",
+    "/room": "Room",
     "/dashboard/documents": "Documents",
     "/dashboard/settings": "Settings",
   };
