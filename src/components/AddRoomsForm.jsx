@@ -67,6 +67,23 @@ const RoomForm = ({ onSubmit, onCancel, initialData }) => {
       </h2>
 
       <div className="mb-4">
+      
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleFileChange}
+          className="w-full p-5 border h-30"
+        />
+        {preview && (
+          <img
+            src={preview}
+            alt="Preview"
+            className="mt-2 max-h-40 object-contain border rounded"
+          />
+        )}
+      </div>
+
+      <div className="mb-4">
         <label className="block mb-1 font-medium">Room Name</label>
         <input
           name="name"
@@ -75,6 +92,8 @@ const RoomForm = ({ onSubmit, onCancel, initialData }) => {
           className="w-full border px-4 py-2 rounded"
         />
       </div>
+
+      
 
       <div className="mb-4">
         <label className="block mb-1 font-medium">Capacity</label>
@@ -111,22 +130,7 @@ const RoomForm = ({ onSubmit, onCancel, initialData }) => {
       </div>
 
       {/* Input foto */}
-      <div className="mb-4">
-        <label className="block mb-1 font-medium">Photo</label>
-        <input
-          type="file"
-          accept="image/*"
-          onChange={handleFileChange}
-          className="w-full"
-        />
-        {preview && (
-          <img
-            src={preview}
-            alt="Preview"
-            className="mt-2 max-h-40 object-contain border rounded"
-          />
-        )}
-      </div>
+      
 
       <div className="flex justify-end gap-3">
         <button
