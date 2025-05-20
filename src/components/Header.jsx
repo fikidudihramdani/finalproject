@@ -5,16 +5,16 @@ import { useLocation } from "react-router-dom";
 const Header = ({ onLogout }) => {
   const location = useLocation();
 
-  // Mapping path ke judul
+  
   const pathTitleMap = {
     "/dashboard": "Dashboard",
     "/resevarsi": "Reservation Schedule",
     "/room": "Room",
-    "/dashboard/documents": "Documents",
-    "/dashboard/settings": "Settings",
+    "/report": "Reports",
+    "/profile": "Settings",
   };
 
-  // Ambil judul berdasarkan pathname saat ini
+  
   const title = pathTitleMap[location.pathname] || "Dashboard";
 
   return (

@@ -4,6 +4,7 @@ import Image from "../images/room.png";
 import CustomToast from "./CustomToast";
 import ConfirmModal from "./ConfirmModal";
 import RoomForm from "./AddRoomsForm";
+import { AnimatePresence, motion } from 'framer-motion';
 
 const initialRooms = Array.from({ length: 12 }, (_, index) => ({
   id: index + 1,
@@ -112,17 +113,34 @@ const RoomsContent = () => {
   };
 
   return (
-    <div className="p-6 min-h-screen bg-white m-5 rounded-md">
+    <div className="p-6 h-[90%] bg-white rounded">
       {/* Form Add/Edit Room */}
+
+        {showForm && (
+            <div
+              className="fixed inset-0 bg-black opacity-25 z-30"
+              onClick={() => setIsSidebarOpen(false)}
+            ></div>
+          )}
+    <AnimatePresence>
+
       {showForm && (
-        <div className="mb-6">
+        <motion.div
+          key="room-form"
+          initial={{ x: '100%', opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: '100%', opacity: 0 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+          className="fixed top-0 right-0 bottom-0 w-96 bg-white shadow-lg z-40 overflow-auto"
+        >
           <RoomForm
             onSubmit={handleSubmitRoom}
             onCancel={handleCancelForm}
             initialData={editingRoom}
           />
-        </div>
+        </motion.div>
       )}
+    </AnimatePresence>
 
       {/* Search & Filters */}
       <div className="flex flex-wrap gap-4 items-center mb-6">
@@ -166,56 +184,58 @@ const RoomsContent = () => {
       </div>
 
       {/* Room Grid */}
-      <div className="grid grid-cols-1 overflow-scroll md:grid-cols-2 xl:grid-cols-4 gap-6">
-        {filteredRooms.length > 0 ? (
-          filteredRooms.map((room) => (
-            <div
-              key={room.id}
-              className="rounded-xl border border-gray-200 overflow-hidden shadow-sm relative group"
-            >
-              <div className="relative">
-                <img
-                  src={room.image}
-                  alt={room.name}
-                  className="w-full h-40 object-cover"
-                />
-                <div className="absolute top-2 right-2 flex gap-2">
-                  <button
-                    onClick={() => handleOpenModal(room)}
-                    className="bg-white p-1 rounded-full shadow"
-                  >
-                    <FiTrash2 className="text-red-500" />
-                  </button>
-                  <button
-                    onClick={() => handleEditRoom(room)}
-                    className="bg-white p-1 rounded-full shadow"
-                  >
-                    <FiEdit2 className="text-orange-500" />
-                  </button>
+      <div className="h-185 overflow-y-auto p-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+          {filteredRooms.length > 0 ? (
+            filteredRooms.map((room) => (
+              <div
+                key={room.id}
+                className="rounded-xl border border-gray-200 overflow-hidden shadow-sm relative group"
+              >
+                <div className="relative">
+                  <img
+                    src={room.image}
+                    alt={room.name}
+                    className="w-full h-40 object-cover"
+                  />
+                  <div className="absolute top-2 right-2 flex gap-2">
+                    <button
+                      onClick={() => handleOpenModal(room)}
+                      className="bg-white p-1 rounded-full shadow"
+                    >
+                      <FiTrash2 className="text-red-500" />
+                    </button>
+                    <button
+                      onClick={() => handleEditRoom(room)}
+                      className="bg-white p-1 rounded-full shadow"
+                    >
+                      <FiEdit2 className="text-orange-500" />
+                    </button>
+                  </div>
+                  <div className="absolute bottom-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full shadow">
+                    {room.type}
+                  </div>
                 </div>
-                <div className="absolute bottom-2 right-2 bg-orange-500 text-white text-xs px-2 py-1 rounded-full shadow">
-                  {room.type}
-                </div>
-              </div>
 
-              <div className="p-4">
-                <h3 className="font-semibold text-lg text-gray-800 mb-2">
-                  {room.name}
-                </h3>
-                <div className="text-sm text-gray-600 flex items-center gap-1 mb-1">
-                  👥 {room.capacity} people
-                </div>
-                <div className="text-sm text-gray-600 flex items-center gap-1">
-                  💰 Rp {room.price}/hours
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg text-gray-800 mb-2">
+                    {room.name}
+                  </h3>
+                  <div className="text-sm text-gray-600 flex items-center gap-1 mb-1">
+                    👥 {room.capacity} people
+                  </div>
+                  <div className="text-sm text-gray-600 flex items-center gap-1">
+                    💰 Rp {room.price}/hours
+                  </div>
                 </div>
               </div>
-            </div>
-          ))
-        ) : (
-          <p className="text-center col-span-full text-gray-500">
-            No rooms found.
-          </p>
-        )}
+            ))
+          ) : (
+            <p className="text-center col-span-full text-gray-500">
+              No rooms found.
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Toast */}

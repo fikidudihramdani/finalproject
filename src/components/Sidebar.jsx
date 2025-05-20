@@ -17,9 +17,9 @@ const Sidebar = () => {
   const menuItems = [
     { icon: <FaTh size={20} />, label: "Dashboard", to: "/dashboard" },
     { icon: <FaCalendarAlt size={20} />, label: "Calendar", to: "/resevarsi" },
-    { icon: <FaClipboardList size={20} />, label: "Reports", to: "/room" },
-    { icon: <FaFileAlt size={20} />, label: "Documents", to: "/dashboard/documents" },
-    { icon: <FaCog size={20} />, label: "Settings", to: "/dashboard/settings" },
+    { icon: <FaClipboardList size={20} />, label: "Rooms", to: "/room" },
+    { icon: <FaFileAlt size={20} />, label: "Report", to: "/report" },
+    { icon: <FaCog size={20} />, label: "Profile", to: "/profile" },
   ];
 
   return (

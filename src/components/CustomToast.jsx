@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiCheckCircle, FiXCircle } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
 
 const CustomToast = ({ message, type = "success", onClose }) => {
   const [show, setShow] = useState(true);
@@ -12,21 +13,28 @@ const CustomToast = ({ message, type = "success", onClose }) => {
     return () => clearTimeout(timer);
   }, [onClose]);
 
-  if (!show) return null;
-
-  const bgColor =
-    type === "success" ? "bg-white" : "bg-red-500";
+  const bgColor = type === "success" ? "bg-white" : "bg-red-500";
   const Icon = type === "success" ? FiCheckCircle : FiXCircle;
 
   return (
-    <div className={`fixed top-26 right-5 z-50 shadow  border-l-4 border-orange-400`}>
-      <div
-        className={`flex items-center gap-3  px-5 py-3 shadow-md animate-slide-up ${bgColor}`}
-      >
-        <Icon className="text-xl" />
-        <span className="font-medium">{message}</span>
-      </div>
-    </div>
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          className="fixed top-6 right-6 z-50 shadow border-l-4 border-orange-400"
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          transition={{ duration: 0.3 }}
+        >
+          <div
+            className={`flex items-center gap-3 px-5 py-3 shadow-md ${bgColor}`}
+          >
+            <Icon className="text-xl" />
+            <span className="font-medium">{message}</span>
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 

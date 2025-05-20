@@ -4,6 +4,7 @@ import Dashboard from "./pages/Dashboard";
 import ReservationSchedule from "./pages/ReservationSchedule";
 import RoomsPage from "./pages/RoomsPage";
 import ReportTable from "./pages/Report";
+import ProfileSettings from "./pages/ProfileSettings";
 
 
 
@@ -14,7 +15,7 @@ const App = () => (
       <Route path="/resevarsi" element={<ReservationSchedule />} />
       <Route path="/room" element={<RoomsPage />} />
       <Route path="/report" element={<ReportTable />} />
-      <Route path="/dashboard/settings" element={<Dashboard />} />
+      <Route path="/profile" element={<ProfileSettings />} />
   </Routes>
 );
 

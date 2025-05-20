@@ -9,12 +9,12 @@ function RoomsPage() {
             <Sidebar />
         </div>
         <div className="flex-1 ml-16 ">
-            <div className="sticky top-0 z-20 bg-whitw shadow">
+            <div className="sticky top-0 z-20 bg-white shadow">
                 <Header />
             </div>
       
       
-      <main className="">
+      <main className="p-3">
         <RoomsContent />
       </main>
       </div>

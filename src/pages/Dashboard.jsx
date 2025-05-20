@@ -29,7 +29,7 @@ const Dashboard = () => {
           <Header />
         </div>
 
-        <div className="p-6 space-y-6">
+        <div className="p-3 space-y-6">
           {/* Filter */}
           <div className="flex w-full bg-white rounded shadow p-3 md:grid-cols-4 gap-4">
             <div className='w-full'>

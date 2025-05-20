@@ -3,6 +3,7 @@ import Sidebar from "@components/Sidebar";
 import Header from "@components/Header";
 import RoomColumn from "@components/RoomColumn";
 import AddReservationForm from "@components/ReservationForm";
+import {motion, AnimatePresence} from 'framer-motion'
 
 const ReservationSchedule = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -109,7 +110,7 @@ const ReservationSchedule = () => {
           <Header />
         </div>
 
-        <div className="p-4">
+        <div className="p-3">
           <div className="mb-4 bg-white p-4 shadow rounded">
             <div className="flex flex-wrap md:flex-nowrap items-center gap-3">
               <h2 className="text-gray-700 font-medium border-r pr-4 md:w-auto w-full md:text-base text-sm">
@@ -161,13 +162,29 @@ const ReservationSchedule = () => {
         ></div>
       )}
 
-      <AddReservationForm
-        isOpen={isSidebarOpen}
-        onClose={() => setIsSidebarOpen(false)}
-        onSubmit={handleAddReservation}
-        rooms={rooms}
-        snacks={[{ name: 'Snack A', price: 10000 }, { name: 'Snack B', price: 10000 }]}
-      />
+
+      <AnimatePresence>
+        {isSidebarOpen && (
+          <motion.div
+            key="sidebar"
+            initial={{ x: '100%' }}
+            animate={{ x: 0 }}
+            exit={{ x: '100%' }}
+            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 bottom-0 w-96 bg-white shadow-lg z-40 overflow-auto"
+          >
+            <AddReservationForm
+              isOpen={isSidebarOpen}
+              onClose={() => setIsSidebarOpen(false)}
+              onSubmit={handleAddReservation}
+              rooms={rooms}
+              snacks={[{ name: 'Snack A', price: 10000 }, { name: 'Snack B', price: 10000 }]}
+            />
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+        
     </div>
   );
 };
